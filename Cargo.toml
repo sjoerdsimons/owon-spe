@@ -1,0 +1,42 @@
+[package]
+name = "owon-spe"
+version = "0.1.0"
+edition = "2021"
+authors = [ "Sjoerd Simons <sjoerd@collabora.com>" ]
+description = "OWON SPE programmable power-suppy api crate"
+license = "MIT OR Apache-2.0"
+homepage = "https://github.com/sjoerdsimons/owon-spe"
+repository = "https://github.com/sjoerdsimons/owon-spe"
+readme = "README.md"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[features]
+async = [ "dep:futures" ]
+serialport = [ "dep:serialport"]
+
+[dependencies]
+log = "0.4.17"
+thiserror = "1.0.38"
+futures = { version = "0.3.25", optional = true }
+serialport = { version = "4.2.0", optional = true }
+
+[dev-dependencies]
+anyhow = "1.0.68"
+async-compat = "0.2.1"
+clap = { version = "4.0.32", features = ["derive"] }
+env_logger = "0.10.0"
+tokio = { version = "1.24.1", features = ["full"] }
+tokio-serial = "5.4.4"
+
+[package.metadata.docs.rs]
+all-features = true
+rustdoc-args = ["--cfg", "docsrs"]
+
+[[example]]
+name = "specli"
+required-features = [ "serialport" ]
+
+[[example]]
+name = "spe-async"
+required-features = [ "async" ]
